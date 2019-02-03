@@ -32,8 +32,8 @@
 %     Kalman filter parameters.
 %
 % Outputs:
-%   - ./mat_files/corrected_detections_[dateTime].mat
-%   - ./mat_files/current_frame_[dateTime].mat
+%   - The ground truth poses saved in ./mat_files/corrected_detections_[dateTime].mat
+%   - The frame last annotated in ./mat_files/current_frame_[dateTime].mat
 %
 % Translational Neuroengineering Laboratory (TNEL) @ UC San Diego
 % Website: http://www.tnel.ucsd.edu

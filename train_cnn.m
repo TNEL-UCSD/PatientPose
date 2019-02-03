@@ -18,10 +18,12 @@
 %   PatientPose package
 %
 % Inputs:
-%   - 
+%   - Folder containing the preprocessed training images
+%   - Ground truth pose annotations generated via label_images.m as a .mat file
 %
 % Outputs:
-%   - 
+%   - A bash script located in ./caffe-heatmap/model-trainer/training_scripts/
+%     to train the patient CNN model
 %
 % Translational Neuroengineering Laboratory (TNEL) @ UC San Diego
 % Website: http://www.tnel.ucsd.edu

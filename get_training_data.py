@@ -1,5 +1,16 @@
 # -*- coding: utf-8 -*-
+''' get_training_data.py
 
+Generates training data for a CNN model, according to 
+
+Usage: python get_training_data.py [folder path]
+
+Options: --save_dir [folder path]
+         --n_jobs [int]
+
+Translational Neuroengineering Laboratory (TNEL) @ UC San Diego
+Website: http://www.tnel.ucsd.edu
+'''
 
 import sys
 import os
@@ -31,9 +42,7 @@ from kinectmatics import opticalflow as kof
 
 #python get_training_data.py "E:\NY591\2016.10.08.10.39\Color" --save_dir "D:\data\workspace_opticalflow\test_research"
 
-#%%
 
- #%%
 def _get_train_kf(df_in, len_seg=10, n_move=50, n_still=10):
     df = df_in.copy()
     valid_movement = df['@Movement'].values
@@ -75,6 +84,7 @@ def _get_train_kf(df_in, len_seg=10, n_move=50, n_still=10):
     
     return df_return, b_train_kf.astype(bool), candidates_full
 
+
 def _get_train_pose(df_in, fr_move=0.7, n_max=2000):
     df = df_in.copy()
     valid_movement = df['@Movement'].values
@@ -110,6 +120,7 @@ def _get_train_pose(df_in, fr_move=0.7, n_max=2000):
 
     return df_return, b_train_pose.astype(bool)
 
+
 def _save_training_data(df_in, save_dir):
     df = df_in.copy()
     
@@ -132,17 +143,16 @@ def _save_training_data(df_in, save_dir):
             count_pose += 1
             savefile = os.path.join(pose_dir, 'Frame_{0}{1}'.format(count_pose, ext))
             
-#                print(savefile)
         elif 'kf' in val['label']:
             count_kf += 1
             savefile = os.path.join(kf_dir, 'Frame_{0}{1}'.format(count_kf, ext))
             
-#                print(savefile)
         else:
             print("invalid file: {0}".format(val['frame']))
             continue
         
         copy(val['frame'], savefile)
+
 
 def generate_training(df_in, save_dir):
     
@@ -159,16 +169,12 @@ def generate_training(df_in, save_dir):
     df.to_csv(file_movements, index=False)
             
     df_save = pd.concat([train_pose, train_kf], sort=False)
-#    df_save = df_save.dropna()
 
     _save_training_data(df_save, save_dir) 
 
     return df
     
 
-
-    
-#%% 
 def run_movement_labeling(folder, save_dir):
     image_list_raw = km.get_image_list(folder, image_fmt='jpg') 
     
@@ -212,13 +218,16 @@ def run_movement_labeling(folder, save_dir):
 
     return df
 
+
 def _get_resolution(fim):
     img = cv2.imread(fim)
     height, width, _ = img.shape
     return (width, height)
 
+
 def _scale_res(res, scale=4):
     return (int(res[0]/scale), int(res[1]/scale))
+
 
 def run_optical_flow(folder, save_dir):
     image_list_raw = km.get_image_list(folder, image_fmt='jpg') 
@@ -248,6 +257,7 @@ def run_optical_flow(folder, save_dir):
         
     
     return processed
+
 
 def _summarize_training(df_in, save_dir):
     import matplotlib.pyplot as plt
@@ -287,6 +297,7 @@ def _summarize_training(df_in, save_dir):
     
     fig.savefig(os.path.join(save_dir,'summary.png'))
     
+
 def run_single_folder(folder, save_dir):
     
     # Make sure input folder is valid
@@ -320,20 +331,15 @@ def run_single_folder(folder, save_dir):
         df_annotated = generate_training(df_labels, save_dir)
         
     _summarize_training(df_annotated, save_dir)
-        
-        
-       #%% 
- #== MAIN ==   
+          
+
 def main(input_dir, save_dir):
 #    print("Loading: {0}\nSaving: {1}".format(input_dir, save_dir))
-
     tic = time.time()
     run_single_folder(input_dir, save_dir)
     print("Runtime: {0}s".format(time.time() - tic))
 
-    
 
-# python get_training_data.py folder 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='PatientPose assistive Python script that extracts optical flow (pyflow) and and marks frames for manual annotation.')
     parser.add_argument('input_dir', help='enter full path to image folder')
@@ -353,4 +359,4 @@ if __name__ == "__main__":
         n_jobs = 1
         
     main(args.input_dir, save_dir)
-    print("donezo")
+    print("Done.")
