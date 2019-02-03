@@ -66,8 +66,8 @@ for rawFolderNum = 1:length(rawDataFolders)
     im.namesSaveNatSort = natsortfiles(im.namesSave);
     
     % Apply personalized Caffe-Heatmap
-	opt.inputDir = strcat(pwd,'/');
-	[joints_256, ~, ~, ~] = applyNet(im.namesNatSort, opt, tnelOpt);
+    opt.inputDir = strcat(pwd,'/');
+    [joints_256, ~, ~, ~] = applyNet(im.namesNatSort, opt, tnelOpt);
 
     % Kalman Filter
     opt.numFiles = numel(im.namesSaveNatSort);

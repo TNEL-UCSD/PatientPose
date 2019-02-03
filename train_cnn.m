@@ -10,7 +10,7 @@
 %   T. Pfister, J. Charles, and A. Zisserman, "Flowing ConvNets for human pose estimation in videos," 
 %       in Proc. IEEE Int. Conf. Comput. Vis., Dec. 2015, pp. 1913-1921.
 %
-%   J. Charles, T. Pfister, D. Magee, D. Hogg, and A. Zisserman, "Personal- izing human video pose estimation,"
+%   J. Charles, T. Pfister, D. Magee, D. Hogg, and A. Zisserman, "Personalizing human video pose estimation,"
 %       in Proc. IEEE Comput. Soc. Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun. 2016, pp. 3063-3072.
 %
 % Usage:

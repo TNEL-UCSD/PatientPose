@@ -28,14 +28,14 @@ addpath(im.folder);
 im.files = dir(fullfile(im.folder,'*.jpg'));
 im.names = natsortfiles({im.files.name});
 
-%% Apply Model to KF Training Data
-opt.modelFile = '/home/kjchen/Documents/tnel_patient-analysis/models/ny531.caffemodel';
-[kf_raw, ~, ~, ~] = applyNet(im.names, opt, pp);
-
 %% Load GT KF Training Data
 disp('Load the ground truth data for the Kalman filter training images');
 uiopen('matlab');
 kf_gt = detections.manual.locs;
+
+%% Apply Model to KF Training Data
+opt.modelFile = '/home/kjchen/Documents/tnel_patient-analysis/models/ny531.caffemodel';
+[kf_raw, ~, ~, ~] = applyNet(im.names, opt, pp);
 
 %% Train KF Noise Parameters
 [Q,R] = kf_train(kf_gt, kf_raw);
