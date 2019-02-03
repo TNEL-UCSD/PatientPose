@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ''' get_training_data.py
 
-Generates training data for a CNN model, according to
+Generates RGB training data from a folder of images for a subject-specific CNN model.
 
 Usage: python get_training_data.py [folder path]
 
