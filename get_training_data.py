@@ -5,8 +5,8 @@ Generates training data for a CNN model, according to
 
 Usage: python get_training_data.py [folder path]
 
-Options: --save_dir [folder path]
-         --n_jobs [int]
+Optional args:  --save_dir [folder path]
+                --n_jobs [int]
 
 Translational Neuroengineering Laboratory (TNEL) @ UC San Diego
 Website: http://www.tnel.ucsd.edu
