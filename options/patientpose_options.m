@@ -1,19 +1,19 @@
-%% TNEL options
-tnelOpt.blurimage = true;
-tnelOpt.blurimagesigma256 = 3;
-tnelOpt.blurimagesigma1080 = 15;
-tnelOpt.existingrect = false; % if cropping rectangle exists already
-tnelOpt.inputfiletype = 'jpg';
-tnelOpt.resize = false; % crop or not
-tnelOpt.saverawjoints = false;
-tnelOpt.visualizeoutput1 = true; % visualize post-processing
-tnelOpt.visualizeoutput1Skel = true;
-tnelOpt.visualizeoutput1Heatmap = false;
-tnelOpt.visualizeoutput2 = false;
+%% PatientPose options
+pp.blurimage = true;
+pp.blurimagesigma256 = 3;
+pp.blurimagesigma1080 = 15;
+pp.existingrect = false; % if cropping rectangle exists already
+pp.inputfiletype = 'jpg';
+pp.resize = false; % crop or not
+pp.saverawjoints = false;
+pp.visualizeoutput1 = true; % visualize post-processing
+pp.visualizeoutput1Skel = true;
+pp.visualizeoutput1Heatmap = false;
+pp.visualizeoutput2 = false;
 
-tnelOpt.input2vidloc = [pwd '/caffe-heatmap/model-trainer/1_data/videos/'];
-tnelOpt.input2initloc = [pwd '/caffe-heatmap/model-trainer/1_data/initialisation/'];
-tnelOpt.personalizeloc = [pwd '/caffe-heatmap/model-trainer/'];
+pp.input2vidloc = [pwd '/caffe-heatmap/model-trainer/1_data/videos/'];
+pp.input2initloc = [pwd '/caffe-heatmap/model-trainer/1_data/initialisation/'];
+pp.personalizeloc = [pwd '/caffe-heatmap/model-trainer/'];
 
 %% Caffe-Heatmap options
 opt.dims = [256 256];
@@ -26,6 +26,3 @@ opt.visualizeheatmap = false;
 opt.heatmapstyle = 'combined'; % combined or separate
 
 opt.modelDefFile = [pwd '/caffe-heatmap/models/heatmap-flic-fusion/matlab.prototxt'];
-
-%% Personalized Pose Estimator options
-personalOpt.numcpus = 30;

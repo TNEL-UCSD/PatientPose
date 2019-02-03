@@ -1,5 +1,5 @@
 % Apply network to a single image
-function [joints, vals, heatmapResized, heatmapVis] = applyNetImage(imgFile, net, opt, tnelOpt, heatmapResizedPrev, numItr)
+function [joints, vals, heatmapResized, heatmapVis] = applyNetImage(imgFile, net, opt, pp, heatmapResizedPrev, numItr)
 
 % Read & reformat input image
 img = imread(imgFile);
@@ -26,7 +26,7 @@ if opt.visualizeheatmap
             figure(c+1); imshow(heatmapVis(:,:,:,c));
         end
     end
-elseif tnelOpt.visualizeoutput1Heatmap
+elseif pp.visualizeoutput1Heatmap
     % Heatmap
     if strcmp(opt.heatmapstyle,'combined')
         heatmapVis = getConfidenceImage(heatmapResized, img);

@@ -1,4 +1,4 @@
 # PatientPose
-Alpha Release
+Beta Release
 
 [Translational Neuroengineering Lab @ UC San Diego](tne.ucsd.edu)

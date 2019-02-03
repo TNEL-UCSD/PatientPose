@@ -1,5 +1,5 @@
 % Wrapper to run network on multiple images
-function [joints, vals, heatmapResized, heatmapVis] = applyNet(files, opt, tnelOpt)
+function [joints, vals, heatmapResized, heatmapVis] = applyNet(files, opt, pp)
 opt.numFiles = numel(files);
 
 fprintf('config:\n\n');
@@ -26,21 +26,21 @@ for ind = 1:opt.numFiles
     imFile = files{ind};
     fprintf('file: %s\n', imFile);
     
-    if opt.visualizeheatmap || tnelOpt.visualizeoutput1Heatmap
+    if opt.visualizeheatmap || pp.visualizeoutput1Heatmap
         if numItr == 1 && strcmp(opt.heatmapstyle,'separate')
-            [joints(:, :, ind), vals(:, ind), heatmapResized(:, :, :, ind), heatmapVis(:,:,:,:,ind)] = applyNetImage([opt.inputDir imFile], net, opt, tnelOpt, zeros(256, 256, 7), numItr);
+            [joints(:, :, ind), vals(:, ind), heatmapResized(:, :, :, ind), heatmapVis(:,:,:,:,ind)] = applyNetImage([opt.inputDir imFile], net, opt, pp, zeros(256, 256, 7), numItr);
         elseif numItr ~= 1 && strcmp(opt.heatmapstyle,'separate')
-            [joints(:, :, ind), vals(:, ind), heatmapResized(:, :, :, ind), heatmapVis(:,:,:,:,ind)] = applyNetImage([opt.inputDir imFile], net, opt, tnelOpt, heatmapResized(:, :, :, ind-1), numItr);
+            [joints(:, :, ind), vals(:, ind), heatmapResized(:, :, :, ind), heatmapVis(:,:,:,:,ind)] = applyNetImage([opt.inputDir imFile], net, opt, pp, heatmapResized(:, :, :, ind-1), numItr);
         elseif numItr == 1 && strcmp(opt.heatmapstyle,'combined')
-            [joints(:, :, ind), vals(:, ind), heatmapResized(:, :, :, ind), heatmapVis(:,:,:,ind)] = applyNetImage([opt.inputDir imFile], net, opt, tnelOpt, zeros(256, 256, 7), numItr);
+            [joints(:, :, ind), vals(:, ind), heatmapResized(:, :, :, ind), heatmapVis(:,:,:,ind)] = applyNetImage([opt.inputDir imFile], net, opt, pp, zeros(256, 256, 7), numItr);
         elseif numItr ~= 1 && strcmp(opt.heatmapstyle,'combined')
-            [joints(:, :, ind), vals(:, ind), heatmapResized(:, :, :, ind), heatmapVis(:,:,:,ind)] = applyNetImage([opt.inputDir imFile], net, opt, tnelOpt, heatmapResized(:, :, :, ind-1), numItr);
+            [joints(:, :, ind), vals(:, ind), heatmapResized(:, :, :, ind), heatmapVis(:,:,:,ind)] = applyNetImage([opt.inputDir imFile], net, opt, pp, heatmapResized(:, :, :, ind-1), numItr);
         end
     else
         if numItr == 1
-            [joints(:, :, ind), vals(:, ind), heatmapResized(:, :, :, ind), ~] = applyNetImage([opt.inputDir imFile], net, opt, tnelOpt, zeros(256, 256, 7), numItr);
+            [joints(:, :, ind), vals(:, ind), heatmapResized(:, :, :, ind), ~] = applyNetImage([opt.inputDir imFile], net, opt, pp, zeros(256, 256, 7), numItr);
         elseif numItr ~= 1
-            [joints(:, :, ind), vals(:, ind), heatmapResized(:, :, :, ind), ~] = applyNetImage([opt.inputDir imFile], net, opt, tnelOpt, heatmapResized(:, :, :, ind-1), numItr);
+            [joints(:, :, ind), vals(:, ind), heatmapResized(:, :, :, ind), ~] = applyNetImage([opt.inputDir imFile], net, opt, pp, heatmapResized(:, :, :, ind-1), numItr);
         end
     end
     
