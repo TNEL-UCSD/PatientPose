@@ -28,7 +28,7 @@ dateTime = datestr(now,'mm-dd-yy_HH:MM:SS');
 run patientpose_setup
 run patientpose_options
 
-%% Select Top-Level Folder with Subfolders of Raw Data
+%% Select Folder Containing Raw Data
 disp('Select folder containing raw data.');
 d = dir(uigetdir);
 im.rawPath = [d(1).folder '/'];

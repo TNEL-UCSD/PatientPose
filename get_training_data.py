@@ -23,8 +23,6 @@ import pandas as pd
 from shutil import copy
 from tqdm import tqdm
 
-# for current use, add kinectmatics path before importing
-# future work-> kinectmatics will be included with PatientPose
 module_path = './lib'
 
 if module_path not in sys.path:
@@ -33,14 +31,6 @@ if module_path not in sys.path:
 import kinectmatics as km
 from kinectmatics import libvid
 from kinectmatics import opticalflow as kof
-
-#%% command to use:
-# python get_training_data.py "D:\data\workspace_opticalflow\Color"
-#folder = "D:\\data\\workspace_opticalflow\\Color"
-#save_dir = "D:\\data\\workspace_opticalflow\\Color\\results"
-#res = (480, 270)
-
-#python get_training_data.py "E:\NY591\2016.10.08.10.39\Color" --save_dir "D:\data\workspace_opticalflow\test_research"
 
 
 def _get_train_kf(df_in, len_seg=10, n_move=50, n_still=10):

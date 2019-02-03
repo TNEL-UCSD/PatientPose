@@ -48,8 +48,8 @@ execute = true;
 
 %% Load Images and Labels
 % Load images being tracked
-disp('Select the folder containing images');
-im.folder = uigetdir('','Folder containing images');
+disp('Select the folder containing images to label');
+im.folder = uigetdir('','Folder containing images to label');
 addpath(im.folder);
 im.files = dir(fullfile(im.folder,'*.jpg'));
 

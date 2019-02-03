@@ -1,4 +1,5 @@
 function [Q_mle_avg, R_mle_avg] = kf_train(kf_gt, kf_raw)
+
 % constant velocity model
 A = [1 0 1 0; 0 1 0 1; 0 0 1 0; 0 0 0 1];
 H = [1 0 0 0; 0 1 0 0];
@@ -159,19 +160,13 @@ for j = 1:7
 
 end
 
-
-
-
 Q_mle_avg = zeros(4,4,7);
 R_mle_avg = zeros(2,2,7);
+
 for j = 1:7
     Q_mle_avg(:,:,j) = mean(QQ_mle(:,:,j,:),4);
     R_mle_avg(:,:,j) = mean(RR_mle(:,:,j,:),4);
 end
-
-
-
-
 
 end
 
