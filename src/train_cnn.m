@@ -67,6 +67,11 @@ fusion.setupFinetuningCropped(opts.cnn,dataset,videoname,...
     detections.manual.locs(:,:,1),opts.imscale,...
     opts.cnn.finetune.dims(1),opts.cnn.finetune.dims(2),dateTime);
 
+% Create training scripts folder and copy to folder
+if ~exist([pp.personalizeloc '/training_scripts/'])
+    mkdir([pp.personalizeloc '/training_scripts/']);
+end
+
 copyfile([pp.personalizeloc '+fusion/fusion_training/' dataset '/heatmap_finetuned/input2_' dateTime '/train_' dateTime '.sh'],...
     [pp.personalizeloc 'training_scripts/train_cnn_' dateTime '.sh']);
 

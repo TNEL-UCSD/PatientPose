@@ -1,0 +1,55 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/kjchen/Documents/TNEL_CV_Tracker/caffe-heatmap_cuDNN/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_de232/fast"
+/usr/bin/make -f CMakeFiles/cmTC_de232.dir/build.make CMakeFiles/cmTC_de232.dir/build
+make[1]: Entering directory '/home/kjchen/Documents/TNEL_CV_Tracker/caffe-heatmap_cuDNN/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_de232.dir/CheckSymbolExists.c.o
+/home/kjchen/anaconda2/bin/cc     -o CMakeFiles/cmTC_de232.dir/CheckSymbolExists.c.o   -c /home/kjchen/Documents/TNEL_CV_Tracker/caffe-heatmap_cuDNN/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_de232
+/home/kjchen/anaconda2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_de232.dir/link.txt --verbose=1
+/home/kjchen/anaconda2/bin/cc       CMakeFiles/cmTC_de232.dir/CheckSymbolExists.c.o  -o cmTC_de232 -rdynamic 
+CMakeFiles/cmTC_de232.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_de232.dir/build.make:97: recipe for target 'cmTC_de232' failed
+make[1]: *** [cmTC_de232] Error 1
+make[1]: Leaving directory '/home/kjchen/Documents/TNEL_CV_Tracker/caffe-heatmap_cuDNN/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_de232/fast' failed
+make: *** [cmTC_de232/fast] Error 2
+
+File /home/kjchen/Documents/TNEL_CV_Tracker/caffe-heatmap_cuDNN/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/kjchen/Documents/TNEL_CV_Tracker/caffe-heatmap_cuDNN/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_8324b/fast"
+/usr/bin/make -f CMakeFiles/cmTC_8324b.dir/build.make CMakeFiles/cmTC_8324b.dir/build
+make[1]: Entering directory '/home/kjchen/Documents/TNEL_CV_Tracker/caffe-heatmap_cuDNN/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_8324b.dir/CheckFunctionExists.c.o
+/home/kjchen/anaconda2/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_8324b.dir/CheckFunctionExists.c.o   -c /home/kjchen/anaconda2/share/cmake-3.6/Modules/CheckFunctionExists.c
+Linking C executable cmTC_8324b
+/home/kjchen/anaconda2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8324b.dir/link.txt --verbose=1
+/home/kjchen/anaconda2/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_8324b.dir/CheckFunctionExists.c.o  -o cmTC_8324b -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_8324b.dir/build.make:97: recipe for target 'cmTC_8324b' failed
+make[1]: *** [cmTC_8324b] Error 1
+make[1]: Leaving directory '/home/kjchen/Documents/TNEL_CV_Tracker/caffe-heatmap_cuDNN/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_8324b/fast' failed
+make: *** [cmTC_8324b/fast] Error 2
+
+
