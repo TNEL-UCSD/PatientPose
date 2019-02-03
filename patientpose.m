@@ -1,7 +1,22 @@
 %% patientpose.m
-%   ---- AUTHOR INFORMATION ----
-%   Kenny Chen
-%   Translational Neuroengineering Laboratory (TNEL) @ UC San Diego
+%
+% This is the main script to generate subject-specific pose estimates via
+% PatientPose. 
+%
+% Usage:
+%   1. Select the folder containing your raw patient RGB data
+%   2. Indicate the area to crop and resize the images by right-click dragging a
+%      square over the desired ROI. Dragging begins at the top-left corner.
+%
+% Inputs:
+%   - Folder containing the raw images to be processed for pose estimates
+%
+% Outputs:
+%   - Coordinates of the selected ROI saved as a .mat file
+%   - Preprocessed images saved under the ./preprocessed/ folder
+%
+% Translational Neuroengineering Laboratory (TNEL) @ UC San Diego
+% Website: http://www.tnel.ucsd.edu
 
 clear all; close all;
 dateTime = datestr(now,'mm-dd-yy_HH:MM:SS');
@@ -56,7 +71,7 @@ for rawFolderNum = 1:length(rawDataFolders)
 
     % Kalman Filter
     opt.numFiles = numel(im.namesSaveNatSort);
-    pose = kf_test(joints_256, Q, R);
+    pose = kf_apply(joints_256, Q, R);
     
     % Save into cell array
     joints_complete(rawFolderNum).date = rawDataFolders{rawFolderNum};
