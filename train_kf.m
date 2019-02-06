@@ -34,7 +34,7 @@ uiopen('matlab');
 kf_gt = detections.manual.locs;
 
 %% Apply Model to KF Training Data
-opt.modelFile = '/home/kjchen/Documents/tnel_patient-analysis/models/ny531.caffemodel';
+opt.modelFile = './caffe-heatmap/models/heatmap-flic-fusion/caffe-heatmap-flic.caffemodel';
 [kf_raw, ~, ~, ~] = applyNet(im.names, opt, pp);
 
 %% Train KF Noise Parameters

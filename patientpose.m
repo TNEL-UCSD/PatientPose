@@ -25,59 +25,44 @@ dateTime = datestr(now,'mm-dd-yy_HH:MM:SS');
 run patientpose_setup
 run patientpose_options
 
-%% Select Top-Level Folder with Subfolders of Data
-disp('Select top-level folder of raw data.');
+%% Load Data
+disp('Select folder containing preprocessed images to estimate pose on.');
 d = dir(uigetdir);
-isub = [d(:).isdir];
-rawPath = [d(1).folder '/'];
-rawDataFolders = {d(isub).name}';
-rawDataFolders(ismember(rawDataFolders,{'.','..'})) = [];
+im.folderPath = [d(1).folder '/'];
+addpath(im.folderPath)
 
 %% Load CNN Model
-disp('Select patient CNN model');
+disp('Load patient CNN caffe model');
 [baseName, folder] = uigetfile('*.caffemodel');
 opt.modelFile = [folder baseName];
 
-%% Load KF Noise Parameters
-disp('Select KF noise parameters')
+%% Load Kalman Filter Noise Parameters
+disp('Load trained Kalman filter noise parameters')
 uiopen('matlab');
 
-%% PatientPose
-% apply PatientPose for each folder
-for rawFolderNum = 1:length(rawDataFolders)
-    disp(['Processing folder ' num2str(rawFolderNum) ' of ' num2str(length(rawDataFolders)) '...']);
-    
-    % Select folder in order
-    im.folderSave = [rawPath rawDataFolders{rawFolderNum} '/adapthisteq'];
-    im.folder = im.folderSave;
-    im.files = dir(fullfile(im.folder, strcat('*.',tnelOpt.inputfiletype)));
-    addpath(im.folderSave);
-    addpath(im.folder);
-    
-    % Sort the files in natural counting order
-    im.names = {im.files.name};
-    im.namesNatSort = natsortfiles(im.names);
-    
-    cd(im.folderSave)
-    
-    % Add directory of processed images
-    im.filesSave = dir(fullfile(im.folderSave, strcat('*.',tnelOpt.inputfiletype)));
-    im.namesSave = {im.filesSave.name};
-    im.namesSaveNatSort = natsortfiles(im.namesSave);
-    
-    % Apply personalized Caffe-Heatmap
-    opt.inputDir = strcat(pwd,'/');
-    [joints_256, ~, ~, ~] = applyNet(im.namesNatSort, opt, tnelOpt);
+%% Apply PatientPose
+% Process files
+im.files = dir(fullfile(im.folderPath, strcat('*.',pp.inputfiletype)));
 
-    % Kalman Filter
-    opt.numFiles = numel(im.namesSaveNatSort);
-    pose = kf_apply(joints_256, Q, R);
-    
-    % Save into cell array
-    joints_complete(rawFolderNum).date = rawDataFolders{rawFolderNum};
-    joints_complete(rawFolderNum).patientpose = pose;
-    
-end
+% Read and sort filenames
+im.names = natsortfiles({im.files.name});
 
-% Save final joint poses
-save([rawPath 'joints_complete.mat'],'joints_complete','-v7.3');
+% Apply personalized CNN model
+path = mfilename('fullpath');
+cd(path(1:50));
+opt.inputDir = im.folderPath;
+[pose_caffe, ~, ~, ~] = applyNet(im.names, opt, pp);
+
+% Kalman Filter
+opt.numFiles = numel(im.names);
+pose = kf_apply(pose_caffe, Q, R);
+
+% Visualize results if desired
+%visualize_pose(pp, im, pose, [])
+
+% Save the date and estimated pose
+estimated_pose.date = dateTime;
+estimated_pose.pose = pose;
+
+% Save data as a mat file
+save(['./estimated_pose_' dateTime '.mat'],'estimated_pose','-v7.3');

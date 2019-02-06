@@ -118,7 +118,7 @@ while frameNum <= length(im.namesNatSort)
                 switch key
 
                     case 'c'
-                        % copy previous skeleton
+                        % Copy previous skeleton
                         for jointNum = 1:7
                             delete(correctedJoints(jointNum));
                         end
