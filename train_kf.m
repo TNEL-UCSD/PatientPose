@@ -33,12 +33,12 @@ disp('Load the ground truth data for the Kalman filter training images');
 uiopen('matlab');
 kf_gt = detections.manual.locs;
 
-%% Apply Model to KF Training Data
+%% Apply Model to Kalman Filter Training Data
 opt.modelFile = './caffe-heatmap/models/heatmap-flic-fusion/caffe-heatmap-flic.caffemodel';
-[kf_raw, ~, ~, ~] = applyNet(im.names, opt, pp);
+[pose_caffe, ~, ~, ~] = applyNet(im.names, opt, pp);
 
-%% Train KF Noise Parameters
-[Q,R] = kf_train(kf_gt, kf_raw);
+%% Train Kalman Filter Noise Parameters
+[Q,R] = kf_train(pose_gt, pose_caffe);
 
 %% Save
 save([pwd '/parameters/QR_' dateTime '.mat'],'Q','R');
