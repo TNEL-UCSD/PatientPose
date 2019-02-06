@@ -1,5 +1,6 @@
 # PatientPose
-[Translational Neuroengineering Lab @ UC San Diego](tnel.ucsd.edu)
+[Translational Neuroengineering Lab @ UC San Diego](http://tnel.ucsd.edu)
+
 
 
 ## Setup
@@ -58,13 +59,13 @@ Output:
 ## Citation
 
 	@article{chen2018patientpose,
-	 author = {K. Chen and P. Gabriel and A. Alasfour and C. Gong and W. K. Doyle and O. Devinsky and D. Friedman and P. Dugan and L. Melloni and T. Thesen and D. Gonda and S. Sattar and S. Wang and V. Gilja},
-	 journal = {IEEE Journal of Translational Engineering in Health and Medicine}, 
-	 title = {Patient-Specific Pose Estimation in Clinical Environments}, 
-	 year = {2018}, 
-	 volume = {6}, 
-	 pages = {1-11}, 
-	 doi = {10.1109/JTEHM.2018.2875464}, 
-	 ISSN = {2168-2372},
+	  author = {K. Chen and P. Gabriel and A. Alasfour and C. Gong and W. K. Doyle and O. Devinsky and D. Friedman and P. Dugan and L. Melloni and T. Thesen and D. Gonda and S. Sattar and S. Wang and V. Gilja},
+	  journal = {IEEE Journal of Translational Engineering in Health and Medicine}, 
+	  title = {Patient-Specific Pose Estimation in Clinical Environments}, 
+	  year = {2018}, 
+	  volume = {6}, 
+	  pages = {1-11}, 
+	  doi = {10.1109/JTEHM.2018.2875464}, 
+	  ISSN = {2168-2372},
 	}
 
