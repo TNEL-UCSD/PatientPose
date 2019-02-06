@@ -13,17 +13,20 @@
 %   J. Charles, T. Pfister, D. Magee, D. Hogg, and A. Zisserman, "Personalizing human video pose estimation,"
 %       in Proc. IEEE Comput. Soc. Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun. 2016, pp. 3063-3072.
 %
+% Many thanks to these authors.
+%
 % Usage:
-%   Run this while the current directory is in the top-level folder of the
-%   PatientPose package
+%   Run this while the current MATLAB directory is in the top-level folder of the PatientPose package (i.e. the 
+%   location of this script). The output will generate a .sh bash script in ./caffe-heatmap/model-trainer/training_scripts/ 
+%   which trains the CNN model when executed in the terminal. To change specific options of the neural network, modify 
+%   the file ./caffe-heatmap/model-trainer/+fusion/base_scripts/solver.prototxt prior to running this script.
 %
 % Inputs:
 %   - Folder containing the preprocessed training images
 %   - Ground truth pose annotations generated via label_images.m as a .mat file
 %
 % Outputs:
-%   - A bash script located in ./caffe-heatmap/model-trainer/training_scripts/
-%     to train the patient CNN model
+%   - A bash script saved in ./caffe-heatmap/model-trainer/training_scripts/ to train the patient CNN model
 %
 % Translational Neuroengineering Laboratory (TNEL) @ UC San Diego
 % Website: http://www.tnel.ucsd.edu

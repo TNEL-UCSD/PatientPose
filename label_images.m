@@ -1,12 +1,10 @@
 %% label_images.m
 %
-% Script to generate ground truth poses for the PatientPose workflow. Use
-% this prior to training the patient-specific CNN model and Kalman
-% filter noise parameters.
+% Script to generate ground truth poses for the PatientPose workflow. Use this prior to training the patient-specific 
+% CNN model and Kalman filter noise parameters.
 %
 % Usage: 
-%   Left-click drag the joints to the ground truth locations of the
-%   patient. The joints are color-coded as such:
+%   Left-click drag the joints to the ground truth locations of the patient. The joints are color-coded as such:
 %       
 %       Head            -   Dark Blue
 %       Left Shoulder   -   Orange
@@ -24,12 +22,11 @@
 %       'backspace'     -   Discard image and set all joints to [-999, -999]
 %       'escape'        -   Save current position and annotations and quit
 %
-%   Note: displayed images are automatically blurred for patient
-%   confidentiality; this can be changed in patientpose_options.m
+%   Note: displayed images are automatically blurred for patient confidentiality; this can be changed in 
+%   patientpose_options.m
 %
 % Inputs:
-%   - Folder containing the training images for either the CNN model or the
-%     Kalman filter parameters.
+%   - Folder containing the training images for either the CNN model or the Kalman filter parameters.
 %
 % Outputs:
 %   - The ground truth poses saved in ./mat_files/corrected_detections_[dateTime].mat

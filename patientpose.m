@@ -1,19 +1,29 @@
 %% patientpose.m
 %
-% This is the main script to generate subject-specific pose estimates via
-% PatientPose. 
+% This is the main script in the PatientPose workflow and assumes preprocessing, manual annotations, and CNN caffe model
+% & Kalman filter parameter training have been completed. Running this will prompt you to load in the various pieces to
+% generate estimated subject poses, but these can be coded in by the user for slightly more automation. The estimated
+% poses can be visualized (overlayed on the images) by uncommenting the line which calls the 'visualize_pose' function.
+% Additionally, heatmaps for each joint can be outputted through the applyNet function (currently only outputting joint
+% values from Pfister's Caffe-Heatmap). Keep in mind however that these heatmaps can be extremely costly in storage
+% space if saved.
 %
 % Usage:
-%   1. Select the folder containing your raw patient RGB data
-%   2. Indicate the area to crop and resize the images by right-click dragging a
-%      square over the desired ROI. Dragging begins at the top-left corner.
+%   1. Select the folder containing your preprocessed images to estimate pose on
+%   2. Load your patient CNN caffe model
+%   3. Load your patient Kalman filter noise parameters
+%   4. Sit back and relax
 %
 % Inputs:
-%   - Folder containing the raw images to be processed for pose estimates
+%   - Preprocessed images to estimate pose on
+%   - Patient CNN caffe model
+%   - Patient Kalman filter parameters
 %
 % Outputs:
-%   - Coordinates of the selected ROI saved as a .mat file
-%   - Preprocessed images saved under the ./preprocessed/ folder
+%   - Estimated poses saved in ./estimated_pose_[dateTime].mat
+%   - JPG's of estimated poses overlayed on the subject (if visualize_pose is uncommented), saved in ./pose/ of the
+%     selected folder of images. Can also optionally output images of the heatmap (from Pfister et al.'s Caffe-Heatmap)
+%     via patientpose_options.m
 %
 % Translational Neuroengineering Laboratory (TNEL) @ UC San Diego
 % Website: http://www.tnel.ucsd.edu
@@ -47,7 +57,7 @@ im.files = dir(fullfile(im.folderPath, strcat('*.',pp.inputfiletype)));
 % Read and sort filenames
 im.names = natsortfiles({im.files.name});
 
-% Apply personalized CNN model
+% Apply patient CNN caffe model
 path = mfilename('fullpath');
 cd(path(1:50));
 opt.inputDir = im.folderPath;

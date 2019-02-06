@@ -1,21 +1,20 @@
 %% preprocess_data.m
 %
-% Preprocesses a selected folder of RGB patient data by first cropping the 
-% images to 256x256 dimensions, then normalizing each image's brightness via 
-% contrast-limited adaptive histogram equalization (CLAHE) on the HSV-converted 
-% frame's v-layer. The location of cropping is selected by right-click dragging 
-% on the pop-up containing the folder's first image.
+% Preprocesses a selected folder of RGB patient data by first cropping the images to 256x256 dimensions, then 
+% normalizing each image's brightness via contrast-limited adaptive histogram equalization (CLAHE) on the HSV-converted 
+% frame's v-layer. The location of cropping is selected by right-click dragging  on the pop-up containing the folder's 
+% first image.
 %
 % Usage:
 %   1. Select the folder containing your raw patient RGB data
-%   2. Indicate the area to crop and resize the images by right-click dragging a
-%      square over the desired ROI. Dragging begins at the top-left corner.
+%   2. Indicate the area to crop and resize the images by right-click dragging a square over the desired ROI. 
+%      Dragging begins at the top-left corner.
 %
 % Inputs:
 %   - Folder containing the raw images to be processed for pose estimates
 %
 % Outputs:
-%   - Coordinates of the selected ROI saved as a .mat file
+%   - Rect coordinates of the selected ROI saved as a .mat file
 %   - Preprocessed images saved under the ./preprocessed/ folder
 %
 % Translational Neuroengineering Laboratory (TNEL) @ UC San Diego
